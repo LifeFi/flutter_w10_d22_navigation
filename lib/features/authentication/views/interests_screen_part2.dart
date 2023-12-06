@@ -40,25 +40,20 @@ class _InterestsScreenPart2State extends State<InterestsScreenPart2> {
   final List<String> _selectedMusicInterests = [];
   final List<String> _selectedEntertainmentInterests = [];
 
-  void _onMusicInterestTap(String interest) {
-    if (_selectedMusicInterests.contains(interest)) {
-      _selectedMusicInterests.remove(interest);
-    } else {
-      _selectedMusicInterests.add(interest);
-    }
-    print(_selectedMusicInterests);
-    setState(() {});
+  void _onInterestTap(String interest, List<String> interestList) {
+    setState(
+      () {
+        if (interestList.contains(interest)) {
+          interestList.remove(interest);
+        } else {
+          interestList.add(interest);
+        }
+      },
+    );
   }
 
-  void _onEntertainmentInterestTap(String interest) {
-    if (_selectedEntertainmentInterests.contains(interest)) {
-      _selectedEntertainmentInterests.remove(interest);
-    } else {
-      _selectedEntertainmentInterests.add(interest);
-    }
-    print(_selectedEntertainmentInterests);
-    setState(() {});
-  }
+  int _selectedLength() =>
+      _selectedMusicInterests.length + _selectedEntertainmentInterests.length;
 
   _goToNext() {
     Navigator.push(
@@ -129,7 +124,8 @@ class _InterestsScreenPart2State extends State<InterestsScreenPart2> {
                     children: [
                       for (var interest in _musicInterestList)
                         GestureDetector(
-                          onTap: () => _onMusicInterestTap(interest),
+                          onTap: () =>
+                              _onInterestTap(interest, _musicInterestList),
                           child: Container(
                             height: 45,
                             alignment: Alignment.center,
@@ -191,7 +187,8 @@ class _InterestsScreenPart2State extends State<InterestsScreenPart2> {
                     children: [
                       for (var interest in _entertainmentInterestList)
                         GestureDetector(
-                          onTap: () => _onEntertainmentInterestTap(interest),
+                          onTap: () => _onInterestTap(
+                              interest, _selectedEntertainmentInterests),
                           child: Container(
                             height: 45,
                             alignment: Alignment.center,
@@ -257,22 +254,16 @@ class _InterestsScreenPart2State extends State<InterestsScreenPart2> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                _selectedMusicInterests.length +
-                            _selectedEntertainmentInterests.length >=
-                        3
+                _selectedLength() >= 3
                     ? "Great work 🎉"
-                    : "${_selectedMusicInterests.length + _selectedEntertainmentInterests.length} of 3 selected",
+                    : "${_selectedLength()} of 3 selected",
                 style: TextStyle(
                   color: Colors.grey.shade700,
                   fontSize: Sizes.size16,
                 ),
               ),
               GestureDetector(
-                onTap: _selectedMusicInterests.length +
-                            _selectedEntertainmentInterests.length >=
-                        3
-                    ? _goToNext
-                    : () {},
+                onTap: _selectedLength() >= 3 ? _goToNext : () {},
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   height: Sizes.size52,
@@ -280,11 +271,7 @@ class _InterestsScreenPart2State extends State<InterestsScreenPart2> {
                   alignment: const Alignment(0, 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(26),
-                    color: _selectedMusicInterests.length +
-                                _selectedEntertainmentInterests.length >=
-                            3
-                        ? Colors.black
-                        : Colors.grey,
+                    color: _selectedLength() >= 3 ? Colors.black : Colors.grey,
                   ),
                   child: const Text(
                     "Next",
