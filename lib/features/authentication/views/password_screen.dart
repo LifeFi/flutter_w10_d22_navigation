@@ -53,6 +53,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
       onTap: _onScaffoldTap,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.white,
           title: FaIcon(
             FontAwesomeIcons.twitter,
             size: Sizes.size36,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_w10_d22_navigation/features/authentication/views/initial_screen.dart';
 import 'package:flutter_w10_d22_navigation/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFF4A98E9),
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const MainNavigationScreen(),
+      home: const InitialScreen(),
     );
   }
 }

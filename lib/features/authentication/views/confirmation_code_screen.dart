@@ -32,6 +32,7 @@ class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: FaIcon(
           FontAwesomeIcons.twitter,
           size: Sizes.size36,

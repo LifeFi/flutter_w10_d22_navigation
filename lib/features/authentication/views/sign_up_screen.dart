@@ -123,6 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Scaffold(
         // resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           leading: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: const Padding(
@@ -409,72 +410,67 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: const EdgeInsets.symmetric(
             horizontal: Sizes.size20,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              isAgree
-                  ? GestureDetector(
+          child: isAgree
+              ? GestureDetector(
+                  onTap: _formKey.currentState != null &&
+                          _formKey.currentState!.validate()
+                      ? _onSubmitTap
+                      : null,
+                  child: Container(
+                    height: Sizes.size64,
+                    // width: Sizes.size96,
+                    alignment: const Alignment(0, 0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(32),
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    child: const Text(
+                      "Sign up",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Sizes.size24,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _writingEmail
+                        ? const Text(
+                            "Use phone instead",
+                            style: TextStyle(
+                              fontSize: Sizes.size20,
+                            ),
+                          )
+                        : const Text(""),
+                    GestureDetector(
                       onTap: _formKey.currentState != null &&
                               _formKey.currentState!.validate()
                           ? _onSubmitTap
                           : null,
                       child: Container(
-                        height: Sizes.size64,
-                        // width: Sizes.size96,
+                        height: Sizes.size52,
+                        width: Sizes.size96,
                         alignment: const Alignment(0, 0),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32),
-                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(26),
+                          color: _formKey.currentState != null &&
+                                  _formKey.currentState!.validate()
+                              ? Colors.black
+                              : Colors.grey,
                         ),
                         child: const Text(
-                          "Sign up",
+                          "Next",
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: Sizes.size24,
-                              fontWeight: FontWeight.w700),
+                              fontSize: Sizes.size20,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _writingEmail
-                            ? const Text(
-                                "Use phone instead",
-                                style: TextStyle(
-                                  fontSize: Sizes.size20,
-                                ),
-                              )
-                            : const Text(""),
-                        GestureDetector(
-                          onTap: _formKey.currentState != null &&
-                                  _formKey.currentState!.validate()
-                              ? _onSubmitTap
-                              : null,
-                          child: Container(
-                            height: Sizes.size52,
-                            width: Sizes.size96,
-                            alignment: const Alignment(0, 0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(26),
-                              color: _formKey.currentState != null &&
-                                      _formKey.currentState!.validate()
-                                  ? Colors.black
-                                  : Colors.grey,
-                            ),
-                            child: const Text(
-                              "Next",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Sizes.size20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
-            ],
-          ),
+                  ],
+                ),
         ),
       ),
     );

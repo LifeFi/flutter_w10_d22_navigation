@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_w10_d22_navigation/constants/gaps.dart';
 import 'package:flutter_w10_d22_navigation/constants/sizes.dart';
-import 'package:flutter_w10_d22_navigation/features/authentication/views/onboadring_screen.dart';
+import 'package:flutter_w10_d22_navigation/features/main_navigation/main_navigation_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const List<String> _musicInterestList = [
@@ -56,12 +56,11 @@ class _InterestsScreenPart2State extends State<InterestsScreenPart2> {
       _selectedMusicInterests.length + _selectedEntertainmentInterests.length;
 
   _goToNext() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const OnboardingScreen(),
-      ),
-    );
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const MainNavigationScreen(),
+        ),
+        (route) => false);
   }
 
   @override
@@ -125,7 +124,7 @@ class _InterestsScreenPart2State extends State<InterestsScreenPart2> {
                       for (var interest in _musicInterestList)
                         GestureDetector(
                           onTap: () =>
-                              _onInterestTap(interest, _musicInterestList),
+                              _onInterestTap(interest, _selectedMusicInterests),
                           child: Container(
                             height: 45,
                             alignment: Alignment.center,
